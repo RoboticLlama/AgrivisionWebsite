@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Themed Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+:root {
+  --color-primary: #438951;
+  --color-primary-dark: #4A644E;
+  --color-bg: #DFEEE2;
+  --color-surface: #D1E7D2;
+  --color-accent-warn: #EE7D28;
+  --color-text-main: #1f2933;
+  --color-text-muted: #4b5563;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-main);
+
+  /* 👇 this is the key: always leave space for the BIG header */
+  padding-top: 260px;  /* tweak 240–280px if you want the card higher/lower */
+}
+
+/* ========================= HEADER ========================= */
+
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: var(--color-primary-dark);
+  color: #ffffff;
+  padding: 5rem 2rem;              /* big hero at very top */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: padding .35s ease, box-shadow .35s ease;
+}
+
+.site-header .logo {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: font-size .35s;
+}
+
+/* ========================= NAV ========================= */
+
+.nav-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-links a {
+  color: #e5f3ea;
+  text-decoration: none;
+  font-size: 1rem;
+  padding-bottom: 6px;
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0px;
+  width: 60%;
+  height: 3px;
+  background: var(--color-surface);
+  border-radius: 3px;
+}
+
+/* Shrunk header */
+
+.site-header.shrink {
+  padding: .9rem 2rem;             /* compact bar once you scroll */
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.site-header.shrink .logo { font-size: 1.4rem; }
+.nav-links.shrink-nav { margin-top: 0; }
+
+/* ========================= SECTIONS ========================= */
+
+section {
+  max-width: 950px;
+  margin: 5rem auto;
+  padding: 2rem 1.5rem;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+.tag {
+  display: inline-block;
+  padding: .25rem .7rem;
+  border-radius: 999px;
+  background: rgba(67,137,81,.18);
+  color: var(--color-primary-dark);
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ========================= FOOTER ========================= */
+
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.5rem;
+  background: var(--color-primary-dark);
+  color: #e9f4ec;
+  text-align: center;
+  font-size: .85rem;
+}
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">GREENLEAF</a>
+  <nav class="nav-links">
+    <a href="#motivation">Problem & Motivation</a>
+    <a href="#approach">Technical Approach</a>
+    <a href="#viz">Visualizations</a>
+    <a href="#results">Results</a>
+    <a href="#takeaways">Takeaways</a>
+  </nav>
+</header>
+
+<section id="motivation" class="card">
+  <span class="tag">01 — PROBLEM & MOTIVATION</span>
+  <h2>What drove this work?</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras accumsan lorem vel justo dapibus dictum. Maecenas imperdiet facilisis orci, id luctus nulla placerat non.</p>
+  <p>Aliquam malesuada, nulla vel porta ullamcorper, arcu tortor egestas sapien, nec volutpat mi sem et mi. Suspendisse efficitur sollicitudin felis, ut cursus nisi vehicula sed.</p>
+  <p>Quisque suscipit nisl arcu, nec mattis mi convallis id. Nulla facilisi. Donec elementum lorem et nunc gravida, ut cursus nisi dapibus.</p>
+  <p>Proin suscipit augue id nunc cursus, et sagittis nibh rutrum. Phasellus consequat convallis efficitur. Sed id quam porta, mattis nisi nec, pharetra lacus.</p>
+  <p>Cras laoreet, erat sit amet hendrerit consequat, lectus lacus accumsan dui, sed vulputate erat velit nec diam.</p>
+</section>
+
+<section id="approach" class="card">
+  <span class="tag">02 — TECHNICAL APPROACH</span>
+  <h2>How did you solve it?</h2>
+  <p>Sed in ante est. Suspendisse potenti. Nunc semper justo sed convallis ornare. Donec iaculis nulla dui, nec congue lacus gravida ut.</p>
+  <p>Integer volutpat tincidunt mauris, sit amet convallis magna faucibus sit amet. Praesent feugiat tortor in rutrum elementum. Pellentesque rhoncus urna ut aliquet aliquam.</p>
+  <p>Maecenas posuere luctus erat, eget pretium nunc porttitor at. Sed consequat, velit quis pulvinar faucibus, massa neque rhoncus velit, sit amet placerat sapien dui vitae magna.</p>
+  <p>Aenean varius faucibus vestibulum. Fusce luctus arcu quam, eget facilisis massa bibendum vel. Nam feugiat convallis tortor, a tristique nunc facilisis eu.</p>
+  <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus eget sollicitudin urna.</p>
+</section>
+
+<section id="viz" class="card">
+  <span class="tag">03 — VISUALIZATIONS</span>
+  <h2>What does the data show?</h2>
+  <p>Vestibulum eu odio id lorem feugiat lacinia et quis lacus. Donec sodales lectus nisl, vel commodo libero ultricies ac.</p>
+  <p>Nam auctor vulputate egestas. Aenean pulvinar, libero eget ullamcorper tincidunt, turpis nibh luctus urna, eu porta massa nisi et elit.</p>
+  <p>Donec ut orci bibendum, lacinia dolor vitae, hendrerit urna. Praesent fermentum eu ante eget egestas. Sed pulvinar felis id dui volutpat scelerisque.</p>
+  <p>Phasellus posuere est mattis ligula tincidunt vehicula. Integer dignissim, risus non volutpat vulputate, tortor arcu aliquet neque, sed dictum justo arcu a arcu.</p>
+  <p>Sed interdum lorem erat, vitae tempor elit tincidunt sed.</p>
+</section>
+
+<section id="results" class="card">
+  <span class="tag">04 — RESULTS</span>
+  <h2>What did you learn?</h2>
+  <p>Curabitur a ex a diam commodo suscipit. Fusce vel massa et ipsum faucibus pulvinar. Cras convallis posuere tortor, sed feugiat velit luctus nec.</p>
+  <p>Etiam gravida augue tortor, non luctus mauris egestas vitae. Integer quis consequat nulla. Nullam vitae arcu id est tincidunt tristique viverra id arcu.</p>
+  <p>Morbi feugiat a dolor id congue. Pellentesque erat massa, condimentum vel sem non, sodales pulvinar velit.</p>
+  <p>Sed viverra orci vel sapien sagittis lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+  <p>Morbi id vulputate ante, at viverra elit.</p>
+</section>
+
+<section id="takeaways" class="card">
+  <span class="tag">05 — TAKEAWAYS</span>
+  <h2>Final conclusions</h2>
+  <p>Suspendisse non faucibus ligula. In dapibus mi sem, eu bibendum dolor congue vel. Etiam malesuada, odio quis maximus pulvinar, dui est commodo sem.</p>
+  <p>Duis dictum cursus egestas. Aliquam erat volutpat. Sed quis consectetur augue. Phasellus vitae facilisis massa, vel dapibus nibh.</p>
+  <p>Nulla luctus scelerisque mauris, sit amet tristique nisl cursus sed. Donec lacinia arcu sit amet libero volutpat, eu consequat turpis ultrices.</p>
+  <p>Curabitur vehicula nunc libero, non tincidunt ligula mollis vitae. Sed pretium efficitur lorem id varius.</p>
+  <p>Nam sollicitudin volutpat mi, vitae vehicula libero ultrices et.</p>
+</section>
+
+<footer class="site-footer">© 2025 GreenLeaf. All rights reserved.</footer>
+
+<script>
+const header     = document.querySelector(".site-header");
+const navLinks   = document.querySelector(".nav-links");
+const navAnchors = document.querySelectorAll(".nav-links a");
+const sections   = document.querySelectorAll("section");
+
+let isShrunk = false;
+
+/* figure out which section is around mid-screen */
+function updateActiveLink() {
+  const viewportMiddle = window.scrollY + window.innerHeight / 2;
+  let activeIndex = 0;
+
+  sections.forEach((section, idx) => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (viewportMiddle >= top && viewportMiddle < bottom) {
+      activeIndex = idx;
+    }
+  });
+
+  navAnchors.forEach((link, idx) => {
+    link.classList.toggle("active", idx === activeIndex);
+  });
+}
+
+/* initial underline */
+updateActiveLink();
+
+/* shrink header as soon as you scroll at all */
+window.addEventListener("scroll", () => {
+  const shouldShrink = window.scrollY > 0;
+
+  if (shouldShrink !== isShrunk) {
+    isShrunk = shouldShrink;
+    header.classList.toggle("shrink", isShrunk);
+    navLinks.classList.toggle("shrink-nav", isShrunk);
+  }
+
+  updateActiveLink();
+});
+
+/* nav clicks: force shrunk header + scroll with offset */
+navAnchors.forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    if (!target) return;
+
+    // ensure header is in shrunk state for a consistent offset
+    if (!isShrunk) {
+      isShrunk = true;
+      header.classList.add("shrink");
+      navLinks.classList.add("shrink-nav");
+    }
+
+    const headerHeight = header.offsetHeight;
+    const offset = headerHeight + 40; // little gap under nav
+    const topPos = target.offsetTop - offset;
+
+    window.scrollTo({ top: topPos, behavior: "smooth" });
+  });
+});
+</script>
+
+</body>
+</html>
