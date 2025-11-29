@@ -25,8 +25,8 @@ body {
   background: var(--color-bg);
   color: var(--color-text-main);
 
-  /* 👇 this is the key: always leave space for the BIG header */
-  padding-top: 260px;  /* tweak 240–280px if you want the card higher/lower */
+  /* always leave space for big header */
+  padding-top: 260px;
 }
 
 /* ========================= HEADER ========================= */
@@ -37,7 +37,7 @@ body {
   z-index: 50;
   background: var(--color-primary-dark);
   color: #ffffff;
-  padding: 5rem 2rem;              /* big hero at very top */
+  padding: 5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +88,7 @@ body {
 /* Shrunk header */
 
 .site-header.shrink {
-  padding: .9rem 2rem;             /* compact bar once you scroll */
+  padding: .9rem 2rem;
   flex-direction: row;
   justify-content: space-between;
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
@@ -121,6 +121,21 @@ section {
   font-size: .8rem;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+/* === Images / visualization grid === */
+
+.card img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 /* ========================= FOOTER ========================= */
@@ -169,14 +184,25 @@ section {
   <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus eget sollicitudin urna.</p>
 </section>
 
+<!-- =============== UPDATED VISUALIZATIONS SECTION =============== -->
 <section id="viz" class="card">
   <span class="tag">03 — VISUALIZATIONS</span>
-  <h2>What does the data show?</h2>
-  <p>Vestibulum eu odio id lorem feugiat lacinia et quis lacus. Donec sodales lectus nisl, vel commodo libero ultricies ac.</p>
-  <p>Nam auctor vulputate egestas. Aenean pulvinar, libero eget ullamcorper tincidunt, turpis nibh luctus urna, eu porta massa nisi et elit.</p>
-  <p>Donec ut orci bibendum, lacinia dolor vitae, hendrerit urna. Praesent fermentum eu ante eget egestas. Sed pulvinar felis id dui volutpat scelerisque.</p>
-  <p>Phasellus posuere est mattis ligula tincidunt vehicula. Integer dignissim, risus non volutpat vulputate, tortor arcu aliquet neque, sed dictum justo arcu a arcu.</p>
-  <p>Sed interdum lorem erat, vitae tempor elit tincidunt sed.</p>
+  <h2>Visualizations</h2>
+
+  <div class="image-grid">
+    <img src="Results/Epoch 1.png"          alt="Epoch 1 result">
+    <img src="Results/Epoch 2.png"          alt="Epoch 2 result">
+    <img src="Results/Epoch 3.png"          alt="Epoch 3 result">
+    <img src="Results/Epoch 4.png"          alt="Epoch 4 result">
+    <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16">
+    <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64">
+    <img src="Results/Epoch BW.png"         alt="Black and white epoch result">
+    <img src="Results/Epoch LRLE 3.png"     alt="Epoch with LR/LE 3">
+    <img src="Results/Epoch LRLE 5.png"     alt="Epoch with LR/LE 5">
+    <img src="Results/Epoch RGB.png"        alt="RGB epoch result">
+    <img src="Results/Epoch pretrained.png" alt="Pretrained epoch result">
+    <img src="Results/Epoch untrained.png"  alt="Untrained epoch result">
+  </div>
 </section>
 
 <section id="results" class="card">
