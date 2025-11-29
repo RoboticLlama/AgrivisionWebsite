@@ -24,9 +24,7 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--color-bg);
   color: var(--color-text-main);
-
-  /* always leave space for big header */
-  padding-top: 260px;
+  padding-top: 260px; /* leave space for big header */
 }
 
 /* ========================= HEADER ========================= */
@@ -138,6 +136,62 @@ section {
   margin-top: 1.5rem;
 }
 
+.image-grid img {
+  cursor: pointer;
+}
+
+/* ========================= LIGHTBOX ========================= */
+
+.hidden {
+  display: none;
+}
+
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+
+.lightbox-content {
+  background: #fdfdfd;
+  max-width: min(1100px, 100%);
+  max-height: 90vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  overflow: auto;
+  padding: 1.5rem 1.75rem 1.75rem;
+  position: relative;
+}
+
+.lightbox-img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.lightbox-caption {
+  margin-top: 1rem;
+  color: var(--color-text-main);
+  line-height: 1.6;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
 /* ========================= FOOTER ========================= */
 
 .site-footer {
@@ -184,24 +238,36 @@ section {
   <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus eget sollicitudin urna.</p>
 </section>
 
-<!-- =============== UPDATED VISUALIZATIONS SECTION =============== -->
+<!-- =============== VISUALIZATIONS SECTION =============== -->
 <section id="viz" class="card">
   <span class="tag">03 — VISUALIZATIONS</span>
   <h2>Visualizations</h2>
 
   <div class="image-grid">
-    <img src="Results/Epoch 1.png"          alt="Epoch 1 result">
-    <img src="Results/Epoch 2.png"          alt="Epoch 2 result">
-    <img src="Results/Epoch 3.png"          alt="Epoch 3 result">
-    <img src="Results/Epoch 4.png"          alt="Epoch 4 result">
-    <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16">
-    <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64">
-    <img src="Results/Epoch BW.png"         alt="Black and white epoch result">
-    <img src="Results/Epoch LRLE 3.png"     alt="Epoch with LR/LE 3">
-    <img src="Results/Epoch LRLE 5.png"     alt="Epoch with LR/LE 5">
-    <img src="Results/Epoch RGB.png"        alt="RGB epoch result">
-    <img src="Results/Epoch pretrained.png" alt="Pretrained epoch result">
-    <img src="Results/Epoch untrained.png"  alt="Untrained epoch result">
+    <img src="Results/Epoch 1.png"          alt="Epoch 1 result"
+         data-caption="Epoch 1: baseline training performance after a single pass through the dataset.">
+    <img src="Results/Epoch 2.png"          alt="Epoch 2 result"
+         data-caption="Epoch 2: model begins to stabilize with slightly improved predictions.">
+    <img src="Results/Epoch 3.png"          alt="Epoch 3 result"
+         data-caption="Epoch 3: further refinement in feature learning and reduced error.">
+    <img src="Results/Epoch 4.png"          alt="Epoch 4 result"
+         data-caption="Epoch 4: early convergence trends visible in the training curves.">
+    <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16"
+         data-caption="Epoch, batch size 16: comparison of performance using a smaller batch size.">
+    <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64"
+         data-caption="Epoch, batch size 64: larger batch size trade-offs in stability vs. generalization.">
+    <img src="Results/Epoch BW.png"         alt="Black and white epoch result"
+         data-caption="Black & white input variant: grayscale preprocessing effects on the model.">
+    <img src="Results/Epoch LRLE 3.png"     alt="Epoch with LR/LE 3"
+         data-caption="Learning rate / LRLE = 3 configuration and its impact on training dynamics.">
+    <img src="Results/Epoch LRLE 5.png"     alt="Epoch with LR/LE 5"
+         data-caption="Learning rate / LRLE = 5 showing more aggressive updates.">
+    <img src="Results/Epoch RGB.png"        alt="RGB epoch result"
+         data-caption="RGB input: model trained using full color channels instead of grayscale.">
+    <img src="Results/Epoch pretrained.png" alt="Pretrained epoch result"
+         data-caption="Pretrained backbone: transfer learning starting point before fine-tuning.">
+    <img src="Results/Epoch untrained.png"  alt="Untrained epoch result"
+         data-caption="Untrained baseline: randomly initialized model for reference comparison.">
   </div>
 </section>
 
@@ -226,6 +292,15 @@ section {
 </section>
 
 <footer class="site-footer">© 2025 GreenLeaf. All rights reserved.</footer>
+
+<!-- ========= LIGHTBOX HTML ========= -->
+<div id="lightbox" class="lightbox-backdrop hidden">
+  <div class="lightbox-content">
+    <button class="lightbox-close" aria-label="Close image">&times;</button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+  </div>
+</div>
 
 <script>
 const header     = document.querySelector(".site-header");
@@ -276,7 +351,6 @@ navAnchors.forEach(link => {
     const target = document.querySelector(link.getAttribute("href"));
     if (!target) return;
 
-    // ensure header is in shrunk state for a consistent offset
     if (!isShrunk) {
       isShrunk = true;
       header.classList.add("shrink");
@@ -284,11 +358,49 @@ navAnchors.forEach(link => {
     }
 
     const headerHeight = header.offsetHeight;
-    const offset = headerHeight + 40; // little gap under nav
+    const offset = headerHeight + 40;
     const topPos = target.offsetTop - offset;
 
     window.scrollTo({ top: topPos, behavior: "smooth" });
   });
+});
+
+/* ========= LIGHTBOX SCRIPT ========= */
+
+const lightbox         = document.getElementById("lightbox");
+const lightboxImg      = document.getElementById("lightbox-img");
+const lightboxCaption  = document.getElementById("lightbox-caption");
+const lightboxCloseBtn = document.querySelector(".lightbox-close");
+const gridImages       = document.querySelectorAll(".image-grid img");
+
+gridImages.forEach(img => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt || "";
+    lightboxCaption.textContent = img.dataset.caption || "";
+    lightbox.classList.remove("hidden");
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.add("hidden");
+  lightboxImg.src = "";
+}
+
+lightboxCloseBtn.addEventListener("click", closeLightbox);
+
+/* close when clicking outside the content */
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
+
+/* close on Escape key */
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !lightbox.classList.contains("hidden")) {
+    closeLightbox();
+  }
 });
 </script>
 
