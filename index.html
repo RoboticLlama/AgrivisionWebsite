@@ -140,21 +140,22 @@ section {
   cursor: pointer;
 }
 
-/* ========================= LIGHTBOX ========================= */
+/* ========================= LIGHTBOX (POP-OUT IMAGE) ========================= */
 
-.hidden {
-  display: none;
-}
-
-.lightbox-backdrop {
+#lightbox {
+  display: none;               /* HIDDEN BY DEFAULT */
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.65);
-  display: flex;
+  backdrop-filter: blur(4px);
   align-items: center;
   justify-content: center;
-  z-index: 100;
   padding: 1.5rem;
+  z-index: 100;
+}
+
+#lightbox.active {
+  display: flex;               /* show when active */
 }
 
 .lightbox-content {
@@ -294,7 +295,7 @@ section {
 <footer class="site-footer">© 2025 GreenLeaf. All rights reserved.</footer>
 
 <!-- ========= LIGHTBOX HTML ========= -->
-<div id="lightbox" class="lightbox-backdrop hidden">
+<div id="lightbox">
   <div class="lightbox-content">
     <button class="lightbox-close" aria-label="Close image">&times;</button>
     <img id="lightbox-img" class="lightbox-img" src="" alt="">
@@ -367,38 +368,42 @@ navAnchors.forEach(link => {
 
 /* ========= LIGHTBOX SCRIPT ========= */
 
-const lightbox         = document.getElementById("lightbox");
-const lightboxImg      = document.getElementById("lightbox-img");
-const lightboxCaption  = document.getElementById("lightbox-caption");
-const lightboxCloseBtn = document.querySelector(".lightbox-close");
-const gridImages       = document.querySelectorAll(".image-grid img");
+const lightbox        = document.getElementById("lightbox");
+const lightboxImg     = document.getElementById("lightbox-img");
+const lightboxCaption = document.getElementById("lightbox-caption");
+const lightboxClose   = document.querySelector(".lightbox-close");
+const gridImages      = document.querySelectorAll(".image-grid img");
 
-gridImages.forEach(img => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt || "";
-    lightboxCaption.textContent = img.dataset.caption || "";
-    lightbox.classList.remove("hidden");
-  });
-});
+function openLightbox(img) {
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt || "";
+  lightboxCaption.textContent = img.dataset.caption || "";
+  lightbox.classList.add("active");
+}
 
 function closeLightbox() {
-  lightbox.classList.add("hidden");
+  lightbox.classList.remove("active");
   lightboxImg.src = "";
 }
 
-lightboxCloseBtn.addEventListener("click", closeLightbox);
+/* open on image click */
+gridImages.forEach(img => {
+  img.addEventListener("click", () => openLightbox(img));
+});
 
-/* close when clicking outside the content */
+/* close on X */
+lightboxClose.addEventListener("click", closeLightbox);
+
+/* close when clicking outside content */
 lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox) {
     closeLightbox();
   }
 });
 
-/* close on Escape key */
+/* close on Esc key */
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !lightbox.classList.contains("hidden")) {
+  if (e.key === "Escape" && lightbox.classList.contains("active")) {
     closeLightbox();
   }
 });
