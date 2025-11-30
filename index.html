@@ -263,13 +263,13 @@ section {
 
   <div class="image-grid">
     <img src="Results/Epoch 1.png"          alt="Epoch 1 result"
-         data-caption="Epoch 1: baseline training performance after a single pass through the dataset.">
+         data-caption="Alexnet_bs16_lr1e-4_noaug – The model learns rapidly and reaches high training accuracy, while validation accuracy stays around 42%. Validation loss climbs steadily even as training loss falls, demonstrating strong overfitting. Without augmentation, the network mainly memorizes the training set instead of learning features that generalize">
     <img src="Results/Epoch 2.png"          alt="Epoch 2 result"
-         data-caption="Epoch 2: model begins to stabilize with slightly improved predictions.">
+         data-caption="alexnet_bs64_lr1e-4_aug - Despite augmentation and a larger batch size, training accuracy again climbs above 90%, but validation accuracy drops to roughly 33%. While augmentation should help generalization, the extremely small dataset limits the benefit. Overfitting behavior is still clear.">
     <img src="Results/Epoch 3.png"          alt="Epoch 3 result"
-         data-caption="Epoch 3: further refinement in feature learning and reduced error.">
+         data-caption="alexnet_bs32_lr1e-3_aug - Increasing the learning rate to 1e-3 makes training less stable. Both training and validation curves fluctuate more, and validation accuracy remains low. This confirms that 1e-3 is too aggressive for this dataset and configuration and does not improve generalization.">
     <img src="Results/Epoch 4.png"          alt="Epoch 4 result"
-         data-caption="Epoch 4: early convergence trends visible in the training curves.">
+         data-caption="resnet18_bs32_lr1e-4_aug - ResNet18 learns quickly and reaches high training accuracy, but validation accuracy again plateaus near 42%, similar to Experiment 1. This suggests that a deeper architecture does not solve generalization issues with a very limited dataset. Overfitting remains the dominant behavior. ">
     <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16"
          data-caption="Epoch, batch size 16: comparison of performance using a smaller batch size.">
     <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64"
