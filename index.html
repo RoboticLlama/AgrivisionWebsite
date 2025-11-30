@@ -270,22 +270,22 @@ section {
          data-caption="alexnet_bs32_lr1e-3_aug - Increasing the learning rate to 1e-3 makes training less stable. Both training and validation curves fluctuate more, and validation accuracy remains low. This confirms that 1e-3 is too aggressive for this dataset and configuration and does not improve generalization.">
     <img src="Results/Epoch 4.png"          alt="Epoch 4 result"
          data-caption="resnet18_bs32_lr1e-4_aug - ResNet18 learns quickly and reaches high training accuracy, but validation accuracy again plateaus near 42%, similar to Experiment 1. This suggests that a deeper architecture does not solve generalization issues with a very limited dataset. Overfitting remains the dominant behavior. ">
-    <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16"
-         data-caption="Epoch, batch size 16: comparison of performance using a smaller batch size.">
-    <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64"
-         data-caption="Epoch, batch size 64: larger batch size trade-offs in stability vs. generalization.">
-    <img src="Results/Epoch BW.png"         alt="Black and white epoch result"
-         data-caption="Black & white input variant: grayscale preprocessing effects on the model.">
-    <img src="Results/Epoch LRLE 3.png"     alt="Epoch with LR/LE 3"
-         data-caption="Learning rate / LRLE = 3 configuration and its impact on training dynamics.">
-    <img src="Results/Epoch LRLE 5.png"     alt="Epoch with LR/LE 5"
-         data-caption="Learning rate / LRLE = 5 showing more aggressive updates.">
-    <img src="Results/Epoch RGB.png"        alt="RGB epoch result"
-         data-caption="RGB input: model trained using full color channels instead of grayscale.">
-    <img src="Results/Epoch pretrained.png" alt="Pretrained epoch result"
-         data-caption="Pretrained backbone: transfer learning starting point before fine-tuning.">
-    <img src="Results/Epoch untrained.png"  alt="Untrained epoch result"
-         data-caption="Untrained baseline: randomly initialized model for reference comparison.">
+  <img src="Results/Epoch pretrained.png" alt="Pretrained epoch result"
+       data-caption="The pretrained model learns the training data extremely well, but generalization remains weak. Validation accuracy stalls around 42% and validation loss increases, indicating overfitting. This baseline sets the reference point for subsequent experiments.">
+  <img src="Results/Epoch untrained.png"  alt="Untrained epoch result"
+       data-caption=" The untrained model reaches much lower training accuracy than the pretrained baseline, confirming that transfer learning from ImageNet significantly accelerates learning. However, validation accuracy is nearly identical (~42%) in both cases, so generalization is still limited by data size. The smaller gap between train and validation metrics suggests the untrained model overfits less, but also learns less.">
+  <img src="Results/Epoch RGB.png"        alt="RGB epoch result"
+       data-caption="The RGB model achieves strong memorization of the training set but performs the worst on validation accuracy (25%) with very high validation loss. In contrast, using grayscale inputs results in slightly better validation accuracy (33%) and lower validation loss. Removing color information appears to encourage the network to rely more on edges and shapes, which generalize better in this small dataset.">
+  <img src="Results/Epoch BW.png"         alt="Black and white epoch result"
+       data-caption=" The RGB model achieves strong memorization of the training set but performs the worst on validation accuracy (25%) with very high validation loss. In contrast, using grayscale inputs results in slightly better validation accuracy (33%) and lower validation loss. Removing color information appears to encourage the network to rely more on edges and shapes, which generalize better in this small dataset.">
+  <img src="Results/Epoch BS16.png"       alt="Epoch with batch size 16"
+       data-caption="Both batch sizes reach very high training accuracy, showing that AlexNet can memorize the set easily. However, the larger batch size (64) achieves higher validation accuracy (about 41.7%). Larger batches produce smoother gradient estimates and slightly more stable optimization, leading to better generalization on this dataset, even though overfitting is still present.">
+  <img src="Results/Epoch BS64.png"       alt="Epoch with batch size 64"
+       data-caption="Both batch sizes reach very high training accuracy, showing that AlexNet can memorize the set easily. However, the larger batch size (64) achieves higher validation accuracy (about 41.7%). Larger batches produce smoother gradient estimates and slightly more stable optimization, leading to better generalization on this dataset, even though overfitting is still present.">
+  <img src="Results/Epoch LRLE 3.png"     alt="Epoch with LR/LE 3"
+       data-caption="The higher learning rate leads to unstable training, lower accuracy, and poorer validation performance. The optimizer likely overshoots minima and cannot settle into a good solution. With a smaller learning rate, the model trains more slowly but achieves better validation accuracy (~41.7%) and more stable loss curves. This indicates that a lower LR is more appropriate for this small dataset.">
+  <img src="Results/Epoch LRLE 5.png"     alt="Epoch with LR/LE 5"
+       data-caption="The higher learning rate leads to unstable training, lower accuracy, and poorer validation performance. The optimizer likely overshoots minima and cannot settle into a good solution. With a smaller learning rate, the model trains more slowly but achieves better validation accuracy (~41.7%) and more stable loss curves. This indicates that a lower LR is more appropriate for this small dataset.">
   </div>
 </section>
 
