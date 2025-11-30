@@ -292,22 +292,16 @@ section {
 
 <section id="takeaways" class="card">
   <span class="tag">04 — TAKEAWAYS</span>
-  <h2>What did you learn?</h2>
-  <p>Curabitur a ex a diam commodo suscipit. Fusce vel massa et ipsum faucibus pulvinar. Cras convallis posuere tortor, sed feugiat velit luctus nec.</p>
-  <p>Etiam gravida augue tortor, non luctus mauris egestas vitae. Integer quis consequat nulla. Nullam vitae arcu id est tincidunt tristique viverra id arcu.</p>
-  <p>Morbi feugiat a dolor id congue. Pellentesque erat massa, condimentum vel sem non, sodales pulvinar velit.</p>
-  <p>Sed viverra orci vel sapien sagittis lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-  <p>Morbi id vulputate ante, at viverra elit.</p>
+  <h2>What did we learn?</h2>
+  <p>The experiments collectively highlight an important finding: the architectures themselves are not the limiting factor — data quantity and variability are. AlexNet and ResNet both learned the training distribution extremely well, achieving high accuracy and low loss in most configurations. However, validation accuracy stayed consistently low across models, averaging between 33%–42% in the best cases. This indicates that the networks were able to memorize input patterns rather than extract general features capable of transferring to new samples. The behavior held true across learning rate shifts, batch size changes, augmentation strategies, and even complete architecture swaps.</p>
+  <p>Additionally, the experiments revealed which configurations were most resilient under data constraints. Lower learning rates improved generalization stability, and grayscale outperformed RGB in validation accuracy, suggesting that color may add noise rather than useful information in this context. Larger batch sizes provided slight improvements in validation performance compared to smaller ones, likely due to smoother gradients and reduced update volatility. While none solved overfitting on their own, each experiment contributed insight into how the model behaves under constraint and how future scaling should be approached.</p>
 </section>
 
 <section id="results" class="card">
   <span class="tag">05 — RESULTS</span>
   <h2>Final conclusions</h2>
-  <p>Suspendisse non faucibus ligula. In dapibus mi sem, eu bibendum dolor congue vel. Etiam malesuada, odio quis maximus pulvinar, dui est commodo sem.</p>
-  <p>Duis dictum cursus egestas. Aliquam erat volutpat. Sed quis consectetur augue. Phasellus vitae facilisis massa, vel dapibus nibh.</p>
-  <p>Nulla luctus scelerisque mauris, sit amet tristique nisl cursus sed. Donec lacinia arcu sit amet libero volutpat, eu consequat turpis ultrices.</p>
-  <p>Curabitur vehicula nunc libero, non tincidunt ligula mollis vitae. Sed pretium efficitur lorem id varius.</p>
-  <p>Nam sollicitudin volutpat mi, vitae vehicula libero ultrices et.</p>
+  <p>The overall results demonstrate that convolutional neural networks like AlexNet and ResNet are capable of learning the visual patterns associated with HLB disease symptoms, but reliable deployment will require more representative data. With only 58 total images, the models reached a performance ceiling early and could not generalize beyond the training set. Adjustments in batch size, learning rate, or input representation produced meaningful behavioral differences, yet validation accuracy remained clustered within a narrow range. This reinforces that the core performance bottleneck is dataset size, not model architecture or training strategy.</p>
+  <p>With continued dataset expansion, improved field sampling, and stronger augmentation pipelines, accuracy could scale substantially. Future work may introduce patch-based training, multi-model ensembles, or region-of-interest feature cropping to increase signal density per image. Integrating spectral imaging or temporal orchard scans could further elevate classifier reliability. Although current models show promising early capability, Agrivision’s next stage will focus on real-world scalability — transforming laboratory performance into field-ready HLB detection that can protect Florida citrus for years to come.</p>
 </section>
 
 <footer class="site-footer">© 2025 AgriVision. All rights reserved.</footer>
